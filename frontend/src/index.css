@@ -1,0 +1,15 @@
+main{
+  min-height: 85vh;
+}
+
+.CartItemDetails span:hover{
+text-decoration: underline;
+cursor: pointer;
+}
+
+.CartItemDetails .CartItemNames,
+.CartItemDetails .CartItemPrice,
+.CartItemDetails .CartItemQty,
+.CartItemDetails .CartItemDelete{
+padding: 1rem;
+}
