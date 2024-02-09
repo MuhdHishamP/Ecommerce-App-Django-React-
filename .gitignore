@@ -1,0 +1,91 @@
+# backend
+# Virtual environment
+env/
+
+# Compiled Python files
+*.pyc
+__pycache__/
+
+# Ignore the database
+db.sqlite3
+
+# Ignore local settings file
+local_settings.py
+
+# Ignore logs and media files
+logs/
+media/
+
+# Ignore the secret key file
+secret_key.txt
+
+# Ignore system-specific files
+*.pyc
+*.pyo
+*.pyd
+*.db
+*.sqlite3
+*.log
+*.pot
+*.pyc
+*.pyo
+__pycache__/
+*.orig
+
+# Ignore IDE or editor-specific files
+.vscode/
+.idea/
+
+# Ignore pipenv virtual environment
+Pipfile
+Pipfile.lock
+
+# frontend
+
+# Node.js
+node_modules/
+
+# Build files
+dist/
+build/
+out/
+
+# Environment variables
+.env.local
+.env.development.local
+.env.test.local
+.env.production.local
+
+# Dependency directories
+.pnp/
+.pnp.js
+
+# Yarn
+yarn-error.log
+yarn.lock
+
+# npm
+package-lock.json
+
+# VSCode
+.vscode/
+
+# IDE-specific files
+.idea/
+
+# macOS
+.DS_Store
+
+# Logs
+*.log
+
+# Test coverage
+coverage/
+
+
+
+# Output of 'npm pack'
+*.tgz
+
+# Next.js
+

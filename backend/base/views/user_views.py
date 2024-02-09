@@ -4,7 +4,7 @@ from rest_framework.response import Response
 from rest_framework_simplejwt.serializers import TokenObtainPairSerializer
 from rest_framework_simplejwt.views import TokenObtainPairView
 from rest_framework import status
-from ..serializers import  UserSerializer, UserSerializerWithToken
+from ..serializers import UserSerializer, UserSerializerWithToken
 from django.contrib.auth.models import User
 from django.contrib.auth.hashers import make_password
 from typing import Dict, Any
@@ -30,14 +30,34 @@ def registerUser(request):
     try:
         user = User.objects.create_user(
             first_name=data["name"],
-            username=data["username"],
+            username=data["email"],
             email=data["email"],
-            password=make_password(data["password"]), 
+            password=make_password(data["password"]),
         )
-        serializer = UserSerializerWithToken(user,many=False)
+        serializer = UserSerializerWithToken(user, many=False)
         return Response(serializer.data)
     except:
-        return Response({"message": "User already exists"},status=status.HTTP_400_BAD_REQUEST)
+        return Response(
+            {"detail": "User already exists"}, status=status.HTTP_400_BAD_REQUEST
+        )
+
+
+@api_view(["PUT"])
+@permission_classes([IsAuthenticated])
+def updateUserProfile(request):
+    user = request.user
+    data = request.data
+    user.first_name = data["name"]
+    user.username = data["email"]
+    user.email = data["email"]
+
+    if data["password"]:
+        user.password = make_password(data["password"])
+    
+    user.save()
+
+    serializer = UserSerializerWithToken(user, many=False)
+    return Response(serializer.data)
 
 
 @api_view(["GET"])
