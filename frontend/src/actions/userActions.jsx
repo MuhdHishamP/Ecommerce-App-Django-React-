@@ -100,7 +100,6 @@ export const getUserDetails = (id) => async (dispatch, getState) => {
       },
     };
     const { data } = await axios.get(`api/users/${id}/`, config);
-    console.log(data);
     dispatch({
       type: USER_DETAIL_SUCCESS,
       payload: data,
@@ -146,7 +145,7 @@ export const updateUserProfile = (user) => async (dispatch, getState) => {
     dispatch({
       type: USER_UPDATE_PROFILE_FAIL,
       payload: error.response.data.detail
-        ? error.response.data.detail // if message specifically specified and handled in the server
+        ? error.response.data.detail // if message specifically specified  in the server
         : error.message, // if not, then it is generic server error message
     });
   }

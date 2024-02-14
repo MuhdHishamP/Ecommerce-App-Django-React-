@@ -4,9 +4,12 @@ import { LinkContainer } from "react-router-bootstrap";
 import Rating from "./Rating";
 
 export const MoneyFormatter = new Intl.NumberFormat("en-IN");
+export const MoneyFormatterWithFraction = new Intl.NumberFormat("en-IN", {
+  minimumFractionDigits: 2,
+});
 
 function Product({ product }) {
-  const formattedPrice = MoneyFormatter.format(product.price)
+  const formattedPrice = MoneyFormatter.format(product.price);
   return (
     <Card className="my-3 p-3 rounded" style={{ cursor: "pointer" }}>
       <LinkContainer to={`/product/${product._id}`}>
