@@ -10,10 +10,13 @@ import {
   USER_DETAIL_REQUEST,
   USER_DETAIL_SUCCESS,
   USER_DETAIL_FAIL,
+  USER_DETAIL_RESET,
   USER_UPDATE_PROFILE_REQUEST,
   USER_UPDATE_PROFILE_SUCCESS,
   USER_UPDATE_PROFILE_FAIL,
 } from "../constants/userConstants";
+
+import { ORDER_LIST_MY_RESET } from "../constants/orderConstants";
 
 export const login = (email, password) => async (dispatch) => {
   try {
@@ -48,6 +51,8 @@ export const login = (email, password) => async (dispatch) => {
 export const logout = (dispatch) => {
   localStorage.removeItem("userInfo");
   dispatch({ type: USER_LOGOUT });
+  dispatch({type: USER_DETAIL_RESET});
+  dispatch({type: ORDER_LIST_MY_RESET});
 };
 
 export const register = (name, email, password) => async (dispatch) => {
@@ -56,7 +61,7 @@ export const register = (name, email, password) => async (dispatch) => {
       type: USER_REGISTER_REQUEST,
     });
     const { data } = await axios.post(
-      "api/users/register/",
+      "/api/users/register/",
       { name: name, email: email, password: password },
       {
         headers: {
@@ -99,7 +104,7 @@ export const getUserDetails = (id) => async (dispatch, getState) => {
         Authorization: `Bearer ${userInfo.token}`,
       },
     };
-    const { data } = await axios.get(`api/users/${id}/`, config);
+    const { data } = await axios.get(`/api/users/${id}/`, config);
     dispatch({
       type: USER_DETAIL_SUCCESS,
       payload: data,
@@ -129,7 +134,11 @@ export const updateUserProfile = (user) => async (dispatch, getState) => {
         Authorization: `Bearer ${userInfo.token}`,
       },
     };
-    const { data } = await axios.put(`api/users/profile/update/`, user, config);
+    const { data } = await axios.put(
+      `/api/users/profile/update/`,
+      user,
+      config
+    );
     dispatch({
       type: USER_UPDATE_PROFILE_SUCCESS,
       payload: data,
